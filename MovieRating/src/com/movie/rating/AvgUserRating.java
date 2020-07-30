@@ -34,8 +34,8 @@ public class AvgUserRating {
          double sum = 0.0D;
          int count = 0;
 
-         for(Iterator var8 = values.iterator(); var8.hasNext(); ++count) {
-            DoubleWritable val = (DoubleWritable)var8.next();
+         for(Iterator itVar = values.iterator(); itVar.hasNext(); ++count) {
+            DoubleWritable val = (DoubleWritable)itVar.next();
             sum += val.get();
          }
 
