@@ -26,7 +26,7 @@ public class AvgUserRating {
       FileOutputFormat.setOutputPath(job, new Path(args[1]));
       System.exit(job.waitForCompletion(true) ? 0 : 1);
    }
-
+   //Reducer
    public static class AverageReducer extends Reducer<Text, DoubleWritable, Text, DoubleWritable> {
       private DoubleWritable result = new DoubleWritable();
 
@@ -38,18 +38,19 @@ public class AvgUserRating {
             DoubleWritable val = (DoubleWritable)itVar.next();
             sum += val.get();
          }
-
+         //Average calculation
          this.result.set(sum / (double)count);
          context.write(key, this.result);
       }
    }
-
+   // Mapper 
    public static class RatingMapper extends Mapper<Object, Text, Text, DoubleWritable> {
       private DoubleWritable rating = new DoubleWritable();
       private Text customer = new Text();
 
       public void map(Object key, Text value, Mapper<Object, Text, Text, DoubleWritable>.Context context) throws IOException, InterruptedException {
          String line = value.toString();
+         //Removing movie ID
          if (!line.contains(":")) {
             String[] line_values = line.split(",");
             this.customer.set(line_values[0]);

@@ -50,6 +50,7 @@ public class AvgRatingOnDate {
 
       public void map(Object key, Text value, Mapper<Object, Text, Text, DoubleWritable>.Context context) throws IOException, InterruptedException {
          String line = value.toString();
+         //Removing movie ID
          if (!line.contains(":")) {
             String[] line_values = line.split(",");
             this.date.set(line_values[2]);
